@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/index.ts",
-    "build": "tsc -p ."
+    "build": "tsc -p .",
+    "pm2": "pm2 start ./ecosystem.config.js"
   },
   "license": "MIT",
   "dependencies": {
@@ -14,12 +15,13 @@
     "graphql": "^14.5.8",
     "koa": "^2.11.0",
     "koa-body": "^4.1.1",
-    "koa-router": "^7.4.0"
+    "koa-router": "^7.4.0",
+    "pm2": "^4.1.2"
   },
   "devDependencies": {
     "@types/koa-router": "^7.0.42",
     "nodemon": "^1.19.4",
-    "pm2": "^4.1.2",
+    "ts-loader": "^6.2.1",
     "ts-node": "^8.5.2",
     "typescript": "^3.7.2"
   },

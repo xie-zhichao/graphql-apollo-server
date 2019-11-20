@@ -6,7 +6,7 @@ module.exports = {
   apps : [
     {
       name      : 'graphql-apollo-server',
-      script    : './src/app.js',
+      script    : './dist/index.js',
       instances : "4",
       env: {
         NODE_ENV: "development"
