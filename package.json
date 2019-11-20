@@ -8,12 +8,20 @@
   },
   "license": "MIT",
   "dependencies": {
-    "apollo-server": "^2.9.9",
-    "graphql": "^14.5.8"
+    "apollo-datasource-rest": "^0.6.6",
+    "apollo-server-caching": "^0.5.0",
+    "apollo-server-koa": "^2.9.9",
+    "graphql": "^14.5.8",
+    "koa": "^2.11.0",
+    "koa-body": "^4.1.1",
+    "koa-router": "^7.4.0"
   },
   "devDependencies": {
+    "@types/koa-router": "^7.0.42",
     "nodemon": "^1.19.4",
+    "pm2": "^4.1.2",
     "ts-node": "^8.5.2",
     "typescript": "^3.7.2"
-  }
+  },
+  "peerDependencies": {}
 }
