@@ -1,42 +1,78 @@
 import { ApolloServer, gql } from 'apollo-server-koa'
+import { prisma } from '../_prisma_generated/prisma-client'
 
+// Construct a schema, using GraphQL schema language
 const typeDefs = gql`
-  # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
+  scalar DateTime
 
-  # This "Book" type defines the queryable fields for every book in our data source.
-  type Book {
-    title: String
-    author: String
+  type Query {
+    feed: [Post!]!
+    drafts: [Post!]!
+    post(id: ID!): Post
   }
 
-  # The "Query" type is special: it lists all of the available queries that
-  # clients can execute, along with the return type for each. In this
-  # case, the "books" query returns an array of zero or more Books (defined above).
-  type Query {
-    books: [Book]
+  type Mutation {
+    createDraft(title: String!, content: String!, authorEmail: String!): Post!
+    deletePost(id: ID!): Post
+    publish(id: ID!): Post
+  }
+
+  type Post {
+    id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    isPublished: Boolean!
+    title: String!
+    content: String!
+    author: User!
+  }
+
+  type User {
+    id: ID!
+    email: String!
+    name: String!
+    posts: [Post!]!
   }
 `
 
-const books = [
-  {
-    title: 'Harry Potter and the Chamber of Secrets',
-    author: 'J.K. Rowling',
-  },
-  {
-    title: 'Jurassic Park',
-    author: 'Michael Crichton',
-  },
-]
-
+// Provide resolver functions for your schema fields
 const resolvers = {
   Query: {
-    books: () => books,
+    feed: (parent: any, args: any, ctx: any) => ctx.db.posts({ where: { isPublished: true } }),
+    drafts: (parent: any, args: any, ctx: any) =>
+      ctx.db.posts({ where: { isPublished: false } }),
+    post: (parent: any, args: any, ctx: any) => ctx.db.post({ id: args.id })
   },
+  Mutation: {
+    createDraft: (parent: any, args: any, ctx: any) => {
+      return ctx.db.createPost({
+        title: args.title,
+        content: args.content,
+        author: { connect: { email: args.authorEmail } }
+      })
+    },
+
+    deletePost: (parent: any, { id }: any, ctx: any) => ctx.db.deletePost({ id }),
+
+    publish: (parent: any, { id }: any, ctx: any) => {
+      return ctx.db.updatePost({
+        where: { id },
+        data: { isPublished: true }
+      })
+    }
+  },
+  Post: {
+    author: (parent: any, args: any, ctx: any) => ctx.db.post({ id: parent.id }).author()
+  },
+  User: {
+    posts: (parent: any, args: any, ctx: any) => ctx.db.user({ id: parent.id }).posts()
+  }
 }
 
 const server = new ApolloServer({ 
-  typeDefs, 
-  resolvers 
+  typeDefs,
+  resolvers,
+  context: { db: prisma }
 })
 
 export default server

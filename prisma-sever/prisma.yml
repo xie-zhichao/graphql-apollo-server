@@ -7,4 +7,3 @@ generate:
 hooks:
   post-deploy:
     - prisma generate
-    - npx nexus-prisma-generate --client ../src/_prisma_generated/prisma-client --output ../src/_prisma_generated/nexus-prisma
