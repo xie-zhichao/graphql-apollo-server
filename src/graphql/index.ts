@@ -21,7 +21,7 @@ const typeDefs = gql`
     id: ID!
     createdAt: DateTime!
     updatedAt: DateTime!
-    isPublished: Boolean!
+    published: Boolean!
     title: String!
     content: String!
     author: User!
@@ -38,9 +38,9 @@ const typeDefs = gql`
 // Provide resolver functions for your schema fields
 const resolvers = {
   Query: {
-    feed: (parent: any, args: any, ctx: any) => ctx.db.posts({ where: { isPublished: true } }),
+    feed: (parent: any, args: any, ctx: any) => ctx.db.posts({ where: { published: true } }),
     drafts: (parent: any, args: any, ctx: any) =>
-      ctx.db.posts({ where: { isPublished: false } }),
+      ctx.db.posts({ where: { published: false } }),
     post: (parent: any, args: any, ctx: any) => ctx.db.post({ id: args.id })
   },
   Mutation: {
@@ -57,7 +57,7 @@ const resolvers = {
     publish: (parent: any, { id }: any, ctx: any) => {
       return ctx.db.updatePost({
         where: { id },
-        data: { isPublished: true }
+        data: { published: true }
       })
     }
   },
