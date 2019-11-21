@@ -1,6 +1,6 @@
-import BaseDao from './baseDao'
+import BaseLoader from './baseLoader'
 
-export default class HomeDao extends BaseDao {
+export default class HomeLoader extends BaseLoader {
   constructor() {
     super()
   }

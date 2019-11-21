@@ -1,6 +1,6 @@
-import HomeDao from '../../dao/fun-app/HomeDao'
+import TopLoader from '../../loader/http/topLoader'
 
-const homeDao = new HomeDao()
+const homeDao = new TopLoader()
 
 export async function getHomePageDatas() {
   const topBanners = await homeDao.getTopBanners()

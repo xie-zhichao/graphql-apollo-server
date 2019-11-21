@@ -1,7 +1,7 @@
 import { RESTDataSource } from 'apollo-datasource-rest'
 import { InMemoryLRUCache } from 'apollo-server-caching'
 
-class BaseDao extends RESTDataSource {
+class BaseLoader extends RESTDataSource {
   constructor() {
     super()
     this.baseURL = 'http://h5test0.i-fun.tech/'
@@ -9,4 +9,4 @@ class BaseDao extends RESTDataSource {
   }
 }
 
-export default BaseDao
+export default BaseLoader

@@ -1,8 +1,8 @@
 import Router from 'koa-router'
-import { funHome } from './funHome'
+import { appHome } from './appHome'
 
 const router = new Router()
 
-router.get('/funHome', funHome)
+router.get('/app-home', appHome)
 
 export default router
