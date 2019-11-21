@@ -1,7 +1,7 @@
 import { prisma } from '../../_prisma_generated/prisma-client'
 
 export async function createUser() {
-  const newUser = await prisma.createUser({ name: 'Alice' })
+  const newUser = await prisma.createUser({ name: 'Alice', email: 'alice@test.com' })
   return newUser
 }
 

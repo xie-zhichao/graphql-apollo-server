@@ -4,7 +4,6 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/index.ts",
-    "nexus": "npx nexus-prisma-generate --client ./src/_prisma_generated/prisma-client --output ./src/_prisma_generated/nexus-prisma",
     "build": "tsc -p .",
     "pm2": "pm2 start ./ecosystem.config.js"
   },
