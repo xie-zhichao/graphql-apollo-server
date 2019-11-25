@@ -23,7 +23,6 @@
   "devDependencies": {
     "@types/koa-router": "^7.0.42",
     "nodemon": "^1.19.4",
-    "ts-loader": "^6.2.1",
     "ts-node": "^8.5.2",
     "typescript": "^3.7.2"
   },
