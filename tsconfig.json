@@ -5,7 +5,6 @@
       "es2016",
       "esnext.asynciterable"
     ],
-    "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -15,10 +14,8 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": false,
-    "baseUrl": "./",
-    "paths": {
-      "@/*": ["src/*"]
-    },
+    "declaration": true,
+    "noResolve": false,
     "outDir": "./dist"
   },
   "include": [
